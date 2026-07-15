@@ -11,6 +11,7 @@
 #include "udpbd.h"
 
 #define BUFLEN  2048
+#define _LARGEFILE64_SOURCE    
 
 #if defined(_WIN32)
 #include <winsock2.h>
