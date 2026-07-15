@@ -75,7 +75,7 @@ jobs:
           make package/udpbd-server/compile V=s
 
           # Find the generated PKG file
-          PKG_PATH=$(find bin/packages -type f -name "udpbd-server_*.apk")
+          PKG_PATH=$(find bin/packages -type f -name "udpbd-server*.apk")
           echo "Found PKG: ${PKG_PATH}"
           echo "pkg_path=${PKG_PATH}" >> $GITHUB_OUTPUT
 
@@ -101,6 +101,6 @@ jobs:
 
             ### Installation:
             ```bash
-            scp udpbd-server_*.apk root@your-router:/tmp/
-            opkg install /tmp/udpbd-server_*.apk
+            scp udpbd-server*.apk root@your-router:/tmp/
+            opkg install /tmp/udpbd-server*.apk
             udpbd-server /dev/sda1
