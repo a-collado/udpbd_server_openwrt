@@ -11,7 +11,6 @@
 #include "udpbd.h"
 
 #define BUFLEN  2048
-#define _LARGEFILE64_SOURCE    
 
 #if defined(_WIN32)
 #include <winsock2.h>
@@ -31,13 +30,11 @@
 #define read _read
 #define write _write
 #define close _close
-#define lseek64 _lseeki64
 #endif
 
 #if defined(__APPLE__) || defined(__FreeBSD__)
 #include <sys/ioctl.h>
 #include <sys/disk.h>
-#define lseek64 lseek
 #define loff_t off_t
 #endif
 
@@ -67,8 +64,8 @@ public:
         }
 
         // Get the size of the file
-        _fsize = lseek64(_fp, 0, SEEK_END);
-        lseek64(_fp, 0, SEEK_SET);
+        _fsize = lseek(_fp, 0, SEEK_END);
+        lseek(_fp, 0, SEEK_SET);
 #if defined(__APPLE__)
         if (_fsize == 0) {
             uint64_t blockCount;
@@ -97,7 +94,7 @@ public:
     void seek(uint32_t sector) {
         loff_t offset = (loff_t)sector * 512;
         //printf("seek %d * 512 = %ld\n", sector, offset);
-        lseek64(_fp, offset, SEEK_SET);
+        lseek(_fp, offset, SEEK_SET);
     }
 
     void read(void *data, size_t size) {
