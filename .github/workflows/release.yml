@@ -15,7 +15,7 @@ jobs:
       matrix:
         target:
           - {
-              version: "19.07.9",
+              version: "22.03.4",
               arch: "ramips",
               subarch: "mt76x8",
               pkg_arch: "mipsel_24kc",
